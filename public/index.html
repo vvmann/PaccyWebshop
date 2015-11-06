@@ -52,7 +52,7 @@
         render: function() {
           return(
             <div className="cart">
-            <img src="../assets/Shopping_cart_1x.png" />
+              <img src="../assets/Shopping_cart_1x.png" />
             </div>
           );
         }
@@ -68,6 +68,34 @@
                 <PaccyCart />
               </div>
             </nav>
+
+          );
+        }
+      });
+
+      var PaccyProductContent = React.createClass({
+        render: function() {
+          return (
+            <div className="container">
+              <div className="page-header">
+                <h2 className="supertitle">Shopping cart</h2>
+              </div>
+              <div className="page-header">
+                <h3 className="smallertitle floatLeft">Product description</h3>
+                <h3 className="smallertitle rightside">Price</h3>
+                <h3 className="smallertitle rightside">Quantity</h3>
+              </div>
+              <div className="productList">
+                <div className="product" >
+                  <div className="floatLeft">
+                    <img  src="../assets/Pepperoni-Pizza-Shirt.png" />
+                    <h4>Hot Salamé</h4>
+                  </div>
+                  <span className="rightside floatright">70€</span>
+                  <span className="rightside floatright">1</span>
+                </div>
+              </div>
+            </div>
           );
         }
       });
@@ -75,8 +103,11 @@
       var PaccyPage = React.createClass({
         render: function () {
           return(
-            <PaccyHeader />
-          )
+            <div>
+              <PaccyHeader />
+              <PaccyProductContent />
+            </div>
+          );
         }
       });
 
