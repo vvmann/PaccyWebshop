@@ -146,13 +146,14 @@
         payWithPaccy: function() {
           var myFirebaseRef = new Firebase("https://luminous-fire-8540.firebaseio.com//");
           var orderRef = myFirebaseRef.child("orders");
+          var now = Date.now();
           orderRef.push({
-            customerId: 12345,
-            actions: [{date: 1446457453, location: "Madison Avenue, New York", type: "orderReceived"}],
+            customerId: 123456,
+            actions: [{date: now, location: "Madison Avenue, New York", type: "orderReceived"}],
             delivery: {active: true, confirmed: false,
               location: {address: "Rauhankatu 2, Helsinki", lat: 24.56363, long: 64.345345},
-              status: {estimate: 1446457953, lat: 24.56363, long: 64.345345},
-              time: {earliest: 1446457453, latest: 1446458453}
+              status: {estimate: now, lat: 24.56363, long: 64.345345},
+              time: {earliest: now, latest: now}
             },
             handler: {title: "Posti"},
             invoice: {expenses: [{price: 5, title: "Shipping"}],
