@@ -73,13 +73,10 @@
         }
       });
 
-      var PaccyProductContent = React.createClass({
-        render: function() {
+      var PaccyProductList = React.createClass({
+        render: function () {
           return (
-            <div className="container">
-              <div className="page-header">
-                <h2 className="supertitle">Shopping cart</h2>
-              </div>
+            <div>
               <div className="page-header">
                 <h3 className="smallertitle floatLeft">Product description</h3>
                 <h3 className="smallertitle rightside">Price</h3>
@@ -95,6 +92,20 @@
                   <span className="rightside floatright">1</span>
                 </div>
               </div>
+            </div>
+          );
+        }
+
+      });
+
+      var PaccyProductContent = React.createClass({
+        render: function() {
+          return (
+            <div className="container">
+              <div className="page-header">
+                <h2 className="supertitle">Shopping cart</h2>
+              </div>
+              <PaccyProductList />
             </div>
           );
         }
