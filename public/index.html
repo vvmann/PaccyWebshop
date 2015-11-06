@@ -71,8 +71,17 @@
           );
         }
       });
+
+      var PaccyPage = React.createClass({
+        render: function () {
+          return(
+            <PaccyHeader />
+          )
+        }
+      });
+
       ReactDOM.render(
-        <PaccyHeader />,
+        <PaccyPage />,
         document.getElementById('content')
       );
     </script>
