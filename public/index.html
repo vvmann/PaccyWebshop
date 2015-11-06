@@ -134,7 +134,7 @@
       var PaccyCheckout = React.createClass({
         getInitialState: function () {
           return {checkoutWithPaccy: false,
-                  login: false}
+                  login: true}
         },
         checkoutWithPaccy: function () {
           this.setState({checkoutWithPaccy: true,
@@ -145,10 +145,10 @@
         },
         payWithPaccy: function() {
           var myFirebaseRef = new Firebase("https://luminous-fire-8540.firebaseio.com//");
-          myFirebaseRef.set({
-            message: "MADAFAKAAS"
+          var derp = myFirebaseRef.child("orders").on("value", function(data) {
+            console.log(data.val());
           });
-          alert('Paid');
+
         },
         render: function() {
           if (!this.state.checkoutWithPaccy && !this.state.login) {
