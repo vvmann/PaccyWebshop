@@ -14,7 +14,7 @@
     <!-- Latest compiled and minified JavaScript -->
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.firebase.com/js/client/2.3.1/firebase.js"></script>
     <link rel="stylesheet" href="css/base.css" />
 
   </head>
@@ -133,26 +133,65 @@
 
       var PaccyCheckout = React.createClass({
         getInitialState: function () {
-          return {checkoutWithPaccy: false};
+          return {checkoutWithPaccy: false,
+                  login: false}
         },
         checkoutWithPaccy: function () {
-          this.setState({checkoutWithPaccy: true});
+          this.setState({checkoutWithPaccy: true,
+                         login: false});
+        },
+        login: function () {
+          this.setState({login: true});
+        },
+        payWithPaccy: function() {
+          var myFirebaseRef = new Firebase("https://luminous-fire-8540.firebaseio.com//");
+          myFirebaseRef.set({
+            message: "MADAFAKAAS"
+          });
+          alert('Paid');
         },
         render: function() {
-          if (!this.state.checkoutWithPaccy) {
+          if (!this.state.checkoutWithPaccy && !this.state.login) {
             return (
+                <div className="checkout">
               <div className="checkoutArea">
                 <button className="btn btn-default">Checkout</button>
                 <button onClick={this.checkoutWithPaccy} className="btn btn-default paccy">Checkout using Paccy</button>
+              </div>
+              </div>
+            );
+          }
+          else if (this.state.checkoutWithPaccy && !this.state.login) {
+            return (
+              <div className="checkout">
+                <div className="checkoutArea paccyCheckout">
+                  <span>Login to your paccy account</span>
+                  <input type="text" placeholder="Username" />
+                  <input type="password" placeholder="Password" />
+                  <button onClick={this.login} className="btn btn-default">Login</button>
+                </div>
               </div>
             );
           }
           else {
             return (
-              <div className="paccyCheckout">
-                <h1>CHECKING OUT WITH PACCY MADAFAKAAS</h1>
+              <div className="checkout">
+                <div className="checkoutArea payWithPaccy">
+                  <ul className="justify">
+                    <li><h4>Paccy ID</h4></li>
+                    <li><h4>Card</h4></li>
+                    <li><h4>Shipping</h4></li>
+                    <li><h4>Payment</h4></li>
+                  </ul>
+                  <ul className="justify">
+                    <li><bold>Vilpuri Yli-Kiitäjä</bold></li>
+                    <li><button className="btn btn-default dropdown-toggle">XXXX XXXX XXXX 1234</button></li>
+                    <li><button className="btn btn-default dropdown-toggle">Posti Paccy 1-day +8€</button></li>
+                    <li><button onClick={this.payWithPaccy} className="btn btn-default pay">Pay 170 €</button></li>
+                  </ul>
+                </div>
               </div>
-            );
+            )
           }
         }
       })
