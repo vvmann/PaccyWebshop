@@ -91,11 +91,30 @@
                   <span className="rightside floatright">70€</span>
                   <span className="rightside floatright">1</span>
                 </div>
+                <div className="product" >
+                  <div className="floatLeft">
+                    <img src="../assets/pizzatee_2.png" />
+                    <h4>Hot Salamé</h4>
+                  </div>
+                  <span className="rightside floatright">100€</span>
+                  <span className="rightside floatright">1</span>
+                </div>
               </div>
             </div>
           );
         }
 
+      });
+
+      var PaccyProductTotals = React.createClass({
+        render: function() {
+          return (
+            <div className="subtotals">
+            <h3 className="smallertitle floatLeft">Subtotal</h3>
+            <h3 className="smallertitle rightside">170 €</h3>
+          </div>
+          );
+        }
       });
 
       var PaccyProductContent = React.createClass({
@@ -106,10 +125,37 @@
                 <h2 className="supertitle">Shopping cart</h2>
               </div>
               <PaccyProductList />
+              <PaccyProductTotals />
             </div>
           );
         }
       });
+
+      var PaccyCheckout = React.createClass({
+        getInitialState: function () {
+          return {checkoutWithPaccy: false};
+        },
+        checkoutWithPaccy: function () {
+          this.setState({checkoutWithPaccy: true});
+        },
+        render: function() {
+          if (!this.state.checkoutWithPaccy) {
+            return (
+              <div className="checkoutArea">
+                <button className="btn btn-default">Checkout</button>
+                <button onClick={this.checkoutWithPaccy} className="btn btn-default paccy">Checkout using Paccy</button>
+              </div>
+            );
+          }
+          else {
+            return (
+              <div className="paccyCheckout">
+                <h1>CHECKING OUT WITH PACCY MADAFAKAAS</h1>
+              </div>
+            );
+          }
+        }
+      })
 
       var PaccyPage = React.createClass({
         render: function () {
@@ -117,6 +163,8 @@
             <div>
               <PaccyHeader />
               <PaccyProductContent />
+              <br/>
+              <PaccyCheckout />
             </div>
           );
         }

@@ -78,8 +78,41 @@ body {
   margin-right: auto;
 }
 
+.product {
+  margin-bottom: 20px;
+}
+
 h4 {
   display: inline-block;
   padding-left: 20px;
+}
+
+.subtotals {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.checkoutArea {
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.checkoutArea button {
+  float: right;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.paccy {
+  background-color: #0073cf;
+  color: white;
+}
+
+.paccyCheckout {
+  width: 100%;
+  background-color: #0073cf;
+  color:white;
 }
 
