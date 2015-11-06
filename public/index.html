@@ -21,26 +21,51 @@
   <body>
     <div id="content"></div>
     <script type="text/babel">
+
+      var PaccyLogo = React.createClass({
+        render: function() {
+          return(
+            <div className="logo">
+              <img src="../assets/Group.png" />
+            </div>
+          );
+        }
+      });
+
+      var PaccyNav = React.createClass({
+        render: function() {
+          return(
+            <div className="navLinks">
+              <ul className="nav nav-pills">
+                <li>Womens</li>
+                <li>Mens</li>
+                <li>Accessories</li>
+                <li>Brands</li>
+                <li>Sale</li>
+              </ul>
+            </div>
+          );
+        }
+      });
+
+      var PaccyCart = React.createClass({
+        render: function() {
+          return(
+            <div className="cart">
+            <img src="../assets/Shopping_cart_1x.png" />
+            </div>
+          );
+        }
+      });
+
       var PaccyHeader = React.createClass({
         render: function() {
           return (
             <nav className="navbar navbar-default navbar-fixed-top">
               <div className="container">
-                <div className="logo">
-                  <img src="../assets/Group.png" />
-                </div>
-                <div className="navLinks">
-                  <ul className="nav nav-pills">
-                    <li>Womens</li>
-                    <li>Mens</li>
-                    <li>Accessories</li>
-                    <li>Brands</li>
-                    <li>Sale</li>
-                  </ul>
-                </div>
-                <div className="cart">
-                  <span className="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-                </div>
+                <PaccyLogo />
+                <PaccyNav />
+                <PaccyCart />
               </div>
             </nav>
           );
