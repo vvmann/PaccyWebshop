@@ -34,21 +34,28 @@
             },
             "actions": [
                 {
-                    "type": "processed",
+                    "type": "orderSent",
                     "date": 1446457453,
                     "location": "Kerava, Finland",
-                    "data": {}
                 },
                 {
-                    "type": "delivered",
-                    "date": 1446457453,
+                    "type": "orderDelivered",
+                    "date": 1446457500,
                     "location": "Kerava, Finland",
-                    "data": {}
+                },
+                {
+                    "type": "orderReceived",
+                    "date": 1446457450,
+                    "location": "Kerava, Finland",
+                },
+                {
+                    "type": "preparingDelivery",
+                    "date": 1446457454,
+                    "location": "Kerava, Finland",
                 }
             ],
             "delivery": {
-                "active": true,
-                "confirmed": false,
+                "active": false,
                 "location": {
                     "address": "Rauhankatu 2, Helsinki",
                     "lon": 64.345345,
@@ -72,7 +79,7 @@
             },
             "service": {
                 "title": "Zalando",
-                "themeId": 3
+                "themeId": 2
             },
             "invoice": {
                 "items": [
@@ -99,21 +106,104 @@
             },
             "actions": [
                 {
-                    "type": "processed",
+                    "type": "orderSent",
                     "date": 1446457453,
                     "location": "Kerava, Finland",
-                    "data": {}
                 },
                 {
-                    "type": "delivered",
-                    "date": 1446457453,
+                    "type": "orderDelivered",
+                    "date": 1446457500,
                     "location": "Kerava, Finland",
-                    "data": {}
+                },
+                {
+                    "type": "orderReceived",
+                    "date": 1446457450,
+                    "location": "Kerava, Finland",
+                },
+                {
+                    "type": "preparingDelivery",
+                    "date": 1446457454,
+                    "location": "Kerava, Finland",
                 }
             ],
             "delivery": {
                 "active": false,
-                "confirmed": false,
+                "location": {
+                    "address": "Rauhankatu 2, Helsinki",
+                    "lon": 64.345345,
+                    "lat": 24.56363
+                },
+                "time": {
+                    "earliest": 1446457453,
+                    "latest": 1446458453
+                },
+                "status": {
+                    "estimate": 1446457953,
+                    "lon": 64.345345,
+                    "lat": 24.56363
+                }
+            }
+        },
+        {
+            "unseenCount": 0,
+            "handler": {
+                "title": "Posti"
+            },
+            "service": {
+                "title": "Red Light District",
+                "themeId": 2
+            },
+            "invoice": {
+                "items": [
+                    {
+                        "title": "Crazy Frog",
+                        "price": 5.9
+                    },
+                    {
+                        "title": "Shake weight",
+                        "price": 9.9
+                    },
+                    {
+                        "title": "Something old",
+                        "price": 19.9
+                    },
+                    {
+                        "title": "Something new",
+                        "price": 19.9
+                    }
+                ],
+                "expenses": [
+                    {
+                        "title": "Shipping",
+                        "price": 5
+                    }
+                ],
+                "total": 35.5
+            },
+            "actions": [
+                {
+                    "type": "orderSent",
+                    "date": 1446457453,
+                    "location": "Kerava, Finland",
+                },
+                {
+                    "type": "orderDelivered",
+                    "date": 1446457500,
+                    "location": "Kerava, Finland",
+                },
+                {
+                    "type": "orderReceived",
+                    "date": 1446457450,
+                    "location": "Kerava, Finland",
+                },
+                {
+                    "type": "preparingDelivery",
+                    "date": 1446457454,
+                    "location": "Kerava, Finland",
+                }
+            ],
+            "delivery": {
+                "active": false,
                 "location": {
                     "address": "Rauhankatu 2, Helsinki",
                     "lon": 64.345345,
