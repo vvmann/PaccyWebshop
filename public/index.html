@@ -22,6 +22,8 @@
     <div id="content"></div>
     <script type="text/babel">
 
+      var newOrderRef;
+
       var PaccyLogo = React.createClass({
         render: function() {
           return(
@@ -131,10 +133,42 @@
         }
       });
 
+      var PaccyAdminControls = React.createClass({
+        sendMessage: function (message) {
+          var dateNow = Math.ceil(Date.now() / 1000);
+          var location = "New York, MURICAH";
+          if (message == "preparingDelivery") location = "Helsinki, Finland";
+          if (message == "orderDelivered") location = "In your hands";
+          newOrderRef.child("actions").push({
+            date: dateNow,
+            location: location,
+            type: message
+          });
+        },
+        readyForDelivery: function () {
+          newOrderRef.child("delivery").update({active: true});
+        },
+        render: function() {
+          return(
+            <div className="paccyAdmin">
+              <h1>Big Admin Buttons</h1>
+              <div className="justify">
+                {this.props.messages.map(function(item, i) {
+                  return (
+                    <button onClick={this.sendMessage.bind(this, item)} className="btn btn-default">{item}</button>
+                  );
+                }, this)}
+                <button onClick={this.readyForDelivery} className="btn btn-default">READY FOR DELIVERY</button>
+              </div>
+            </div>
+          );
+        }
+      });
+
       var PaccyCheckout = React.createClass({
         getInitialState: function () {
           return {checkoutWithPaccy: false,
-                  login: true}
+                  login: false}
         },
         checkoutWithPaccy: function () {
           this.setState({checkoutWithPaccy: true,
@@ -146,11 +180,11 @@
         payWithPaccy: function() {
           var myFirebaseRef = new Firebase("https://luminous-fire-8540.firebaseio.com//");
           var orderRef = myFirebaseRef.child("orders");
-          var now = Date.now();
-          orderRef.push({
+          var now = Math.ceil(Date.now() / 1000);
+          newOrderRef = orderRef.push({
             customerId: 123456,
             actions: [{date: now, location: "Madison Avenue, New York", type: "orderReceived"}],
-            delivery: {active: true, confirmed: false,
+            delivery: {active: false,
               location: {address: "Rauhankatu 2, Helsinki", lat: 24.56363, long: 64.345345},
               status: {estimate: now, lat: 24.56363, long: 64.345345},
               time: {earliest: now, latest: now}
@@ -204,11 +238,12 @@
                     <li><button onClick={this.payWithPaccy} className="btn btn-default pay">Pay 170 €</button></li>
                   </ul>
                 </div>
+                <PaccyAdminControls messages={['orderSent', 'preparingDelivery', 'orderDelivered']} />
               </div>
-            )
+            );
           }
         }
-      })
+      });
 
       var PaccyPage = React.createClass({
         render: function () {

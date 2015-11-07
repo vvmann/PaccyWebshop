@@ -154,3 +154,13 @@ h4 {
   color: #0073cf;
 }
 
+.paccyAdmin {
+  width: 100%;
+  height: 150px;
+  margin-top: 300px;
+  color: black;
+}
+.paccyAdmin button {
+  margin-right: 60px;
+  margin-left: 60px;
+}
