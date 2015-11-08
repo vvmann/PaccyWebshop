@@ -6,6 +6,7 @@
     <!-- Not present in the tutorial. Just for basic styling. -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.0/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-bootstrap/0.27.3/react-bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.6.15/browser.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -136,9 +137,12 @@
       var PaccyAdminControls = React.createClass({
         sendMessage: function (message) {
           var dateNow = Math.ceil(Date.now() / 1000);
-          var location = "New York, MURICAH";
+          var location = "New York, USA";
           if (message == "preparingDelivery") location = "Helsinki, Finland";
-          if (message == "orderDelivered") location = "In your hands";
+          if (message == "orderDelivered") {
+            location = "In your hands";
+            newOrderRef.child("delivery").update({active: false});
+          }
           newOrderRef.child("actions").push({
             date: dateNow,
             location: location,
@@ -165,19 +169,20 @@
         }
       });
 
-      var PaccyCheckout = React.createClass({
-        getInitialState: function () {
-          return {checkoutWithPaccy: false,
-                  login: false}
+      var Modal = ReactBootstrap.Modal;
+
+      var PaccyThankYou = React.createClass({
+        getInitialState() {
+          return {showModal: false}
         },
-        checkoutWithPaccy: function () {
-          this.setState({checkoutWithPaccy: true,
-                         login: false});
+        close() {
+          this.setState({showModal: false});
         },
-        login: function () {
-          this.setState({login: true});
+        open() {
+          this.setState({showModal: true});
         },
         payWithPaccy: function() {
+          this.open();
           var myFirebaseRef = new Firebase("https://luminous-fire-8540.firebaseio.com//");
           var orderRef = myFirebaseRef.child("orders");
           var now = Math.ceil(Date.now() / 1000);
@@ -191,27 +196,61 @@
             },
             handler: {title: "Posti"},
             invoice: {expenses: [{price: 5, title: "Shipping"}],
-                      items: [{price: 100, title: "Pizza Shirt"}, {price: 70, title: "Pizza t-shirt"}],
-                      total: 35.5
+              items: [{price: 100, title: "Pizza Shirt"}, {price: 70, title: "Pizza t-shirt"}],
+              total: 175
             },
-            service: {themeId: 3, title: "Clth Pizza Clothing store"},
+            service: {themeId: 3, title: "Clth Store"},
             unseenCount: 0,
           });
         },
         render: function() {
+          return (
+          <div>
+            <button className="btn btn-default" onClick={this.payWithPaccy}>Pay 175€</button>
+            <Modal show={this.state.showModal} onHide={this.close}>
+              <Modal.Header closeButton>
+                <Modal.Title>Thank you for shopping with Paccy!</Modal.Title>
+              </Modal.Header>
+              <Modal.Body>
+                <img className="packetPic" src="../assets/paccypacket.png" /> <br /><br /><br /><br />
+                <p>Thank you for shopping with us, Antti!</p>
+                <p>You can now follow your order in your Paccy mobile application.</p>
+              </Modal.Body>
+              <Modal.Footer>
+                <button className="btn btn-primary" onClick={this.close}>Close</button>
+              </Modal.Footer>
+            </Modal>
+          </div>
+          );
+        }
+      });
+
+      var PaccyCheckout = React.createClass({
+        getInitialState: function () {
+          return {checkoutWithPaccy: false,
+                  login: false}
+        },
+        checkoutWithPaccy: function () {
+          this.setState({checkoutWithPaccy: true,
+                         login: false});
+        },
+        login: function () {
+          this.setState({login: true});
+        },
+        render: function() {
           if (!this.state.checkoutWithPaccy && !this.state.login) {
             return (
-                <div className="checkout">
-              <div className="checkoutArea">
-                <button className="btn btn-default">Checkout</button>
-                <button onClick={this.checkoutWithPaccy} className="btn btn-default paccy">Checkout using Paccy</button>
-              </div>
+                <div className="checkout black">
+                  <div className="checkoutArea">
+                    <button className="btn btn-default">Checkout</button>
+                    <button onClick={this.checkoutWithPaccy} className="btn btn-default paccy">Checkout using Paccy</button>
+                  </div>
               </div>
             );
           }
           else if (this.state.checkoutWithPaccy && !this.state.login) {
             return (
-              <div className="checkout">
+              <div className="checkout paccycolors">
                 <div className="checkoutArea paccyCheckout">
                   <span>Login to your paccy account</span>
                   <input type="text" placeholder="Username" />
@@ -235,9 +274,10 @@
                     <li><bold>Antti Rauvola</bold></li>
                     <li><button className="btn btn-default dropdown-toggle">XXXX XXXX XXXX 1234</button></li>
                     <li><button className="btn btn-default dropdown-toggle">Posti Paccy 1-day +8€</button></li>
-                    <li><button onClick={this.payWithPaccy} className="btn btn-default pay">Pay 170 €</button></li>
+                    <li><PaccyThankYou /></li>
                   </ul>
                 </div>
+
                 <PaccyAdminControls messages={['orderSent', 'preparingDelivery', 'orderDelivered']} />
               </div>
             );

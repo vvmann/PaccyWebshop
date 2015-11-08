@@ -164,3 +164,15 @@ h4 {
   margin-right: 60px;
   margin-left: 60px;
 }
+
+.black {
+  background-color: white;
+}
+
+.paccycolors {
+  background-color: #0073cf;
+}
+
+.modal-body {
+  text-align: center;
+}
